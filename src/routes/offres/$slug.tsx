@@ -177,7 +177,7 @@ function JobDetailPage() {
         </div>
 
         {/* Colonne latérale */}
-        <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">
+        <aside className="min-w-0 space-y-5 lg:sticky lg:top-24 lg:self-start">
           <ApplyCard job={job} deadlineUrgent={deadline.urgent} deadlineText={deadline.text} expired={deadline.expired} />
 
           {related && related.length > 0 && (

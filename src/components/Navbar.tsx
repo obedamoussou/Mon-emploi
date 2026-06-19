@@ -52,13 +52,13 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Link
+            {/* <Link
               to="/offres"
               className="hidden h-10 w-10 items-center justify-center rounded-xl text-ink-500 transition hover:bg-ink-100 hover:text-ink-800 sm:flex"
               aria-label="Rechercher"
             >
               <Search className="h-5 w-5" />
-            </Link>
+            </Link> */}
             <Link
               to="/tableau-de-bord"
               search={{ section: 'notifications' }}
@@ -68,7 +68,7 @@ export function Navbar() {
               <Bell className="h-5 w-5" />
               <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white" />
             </Link>
-            <Link
+            {/* <Link
               to="/tableau-de-bord"
               className="flex items-center gap-2 rounded-xl py-1 pl-1 pr-1 transition hover:bg-ink-50 sm:pr-3"
               aria-label="Espace candidat"
@@ -77,7 +77,7 @@ export function Navbar() {
               <span className="hidden text-sm font-semibold text-ink-800 sm:inline">
                 {currentUser.firstName}
               </span>
-            </Link>
+            </Link> */}
             <button
               onClick={() => setSignupOpen(true)}
               className="btn-secondary hidden lg:inline-flex"
@@ -85,9 +85,9 @@ export function Navbar() {
               <UserPlus className="h-4 w-4" />
               S’inscrire
             </button>
-            <Link to="/espace-organisme" className="btn-primary hidden lg:inline-flex">
+            {/* <Link to="/espace-organisme" className="btn-primary hidden lg:inline-flex">
               Espace organisme
-            </Link>
+            </Link> */}
 
             <button
               className="flex h-10 w-10 items-center justify-center rounded-xl text-ink-700 transition hover:bg-ink-100 lg:hidden"
@@ -110,7 +110,7 @@ export function Navbar() {
             >
               <div className="container-page space-y-1 py-4">
                 {/* Accès rapide espace candidat */}
-                <Link
+                {/* <Link
                   to="/tableau-de-bord"
                   onClick={() => setMobileOpen(false)}
                   className="mb-2 flex items-center gap-3 rounded-2xl border border-ink-100 bg-ink-50/60 p-3 transition hover:border-brand-200"
@@ -123,7 +123,7 @@ export function Navbar() {
                     <p className="text-xs text-ink-500">Accéder à mon espace candidat</p>
                   </div>
                   <LayoutDashboard className="h-5 w-5 text-brand-500" />
-                </Link>
+                </Link> */}
 
                 {navLinks.map((l) => (
                   <Link
@@ -137,7 +137,7 @@ export function Navbar() {
                   </Link>
                 ))}
 
-                <div className="grid grid-cols-2 gap-2 pt-2">
+                <div className="grid grid-cols-1 gap-2 pt-2">
                   <button
                     onClick={() => {
                       setMobileOpen(false)
@@ -148,13 +148,13 @@ export function Navbar() {
                     <UserPlus className="h-4 w-4" />
                     S’inscrire
                   </button>
-                  <Link
+                  {/* <Link
                     to="/espace-organisme"
                     onClick={() => setMobileOpen(false)}
                     className="btn-primary w-full"
                   >
                     Organisme
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </motion.div>

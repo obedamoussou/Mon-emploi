@@ -30,7 +30,7 @@ export function JobCard({ job, index = 0 }: { job: Job; index?: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.35, delay: Math.min(index * 0.04, 0.24) }}
-      className="group relative"
+      className="group relative min-w-0"
     >
       <Link
         to="/offres/$slug"
