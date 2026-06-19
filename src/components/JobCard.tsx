@@ -35,17 +35,17 @@ export function JobCard({ job, index = 0 }: { job: Job; index?: number }) {
       <Link
         to="/offres/$slug"
         params={{ slug: job.slug }}
-        className="block rounded-2xl border border-ink-100 bg-white p-5 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-card-hover"
+        className="block rounded-2xl border border-ink-100 bg-white p-4 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-card-hover sm:p-5"
       >
-        <div className="flex items-start gap-4">
+        <div className="flex items-start gap-3 sm:gap-4">
           <Avatar
-            initials={inst?.logoInitials ?? 'TL'}
+            initials={inst?.logoInitials ?? 'ME'}
             color={inst?.logoColor}
             size="lg"
-            className="!rounded-xl"
+            className="!h-11 !w-11 !rounded-xl !text-sm sm:!h-14 sm:!w-14 sm:!text-base"
           />
           <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-1.5">
               <Badge variant={kindVariant[job.kind]}>{kindLabels[job.kind]}</Badge>
               {job.urgent && (
                 <Badge variant="danger" icon={<Flame className="h-3 w-3" />}>
@@ -54,7 +54,7 @@ export function JobCard({ job, index = 0 }: { job: Job; index?: number }) {
               )}
               {job.featured && <Badge variant="gold">À la une</Badge>}
             </div>
-            <h3 className="mt-2 line-clamp-2 font-display text-base font-bold text-ink-900 transition group-hover:text-brand-700">
+            <h3 className="mt-2 line-clamp-2 font-display text-[15px] font-bold text-ink-900 transition group-hover:text-brand-700 sm:text-base">
               {job.title}
             </h3>
             <p className="mt-0.5 truncate text-sm text-ink-500">{inst?.name}</p>
@@ -64,10 +64,10 @@ export function JobCard({ job, index = 0 }: { job: Job; index?: number }) {
 
         <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-ink-500">{job.summary}</p>
 
-        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-ink-500">
+        <div className="mt-3.5 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-ink-500 sm:mt-4 sm:gap-x-4">
           <span className="inline-flex items-center gap-1.5">
-            <MapPin className="h-3.5 w-3.5 text-ink-400" />
-            {job.city}, {regionName(job.regionId)}
+            <MapPin className="h-3.5 w-3.5 shrink-0 text-ink-400" />
+            <span className="truncate">{job.city}, {regionName(job.regionId)}</span>
           </span>
           <Badge variant={contractVariant[job.contractType]}>{job.contractType}</Badge>
           <span className="inline-flex items-center gap-1.5">
@@ -76,11 +76,11 @@ export function JobCard({ job, index = 0 }: { job: Job; index?: number }) {
           </span>
         </div>
 
-        <div className="mt-4 flex items-center justify-between border-t border-ink-100 pt-3">
-          <span className="text-xs text-ink-400">Publié {timeAgo(job.publishedAt)}</span>
+        <div className="mt-3.5 flex items-center justify-between gap-2 border-t border-ink-100 pt-3 sm:mt-4">
+          <span className="truncate text-xs text-ink-400">Publié {timeAgo(job.publishedAt)}</span>
           <span
             className={cn(
-              'inline-flex items-center gap-1.5 text-xs font-semibold',
+              'inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold',
               deadline.expired
                 ? 'text-ink-400'
                 : deadline.urgent
@@ -101,7 +101,7 @@ export function JobCard({ job, index = 0 }: { job: Job; index?: number }) {
       </Link>
 
       <button
-        className="absolute right-4 top-[4.6rem] hidden rounded-lg p-1.5 text-ink-300 transition hover:bg-brand-50 hover:text-brand-600 sm:block"
+        className="absolute right-3 top-[4.4rem] hidden rounded-lg p-1.5 text-ink-300 transition hover:bg-brand-50 hover:text-brand-600 sm:right-4 sm:top-[4.6rem] sm:block"
         aria-label="Sauvegarder l’offre"
         onClick={(e) => e.preventDefault()}
       >
