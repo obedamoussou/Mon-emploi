@@ -11,7 +11,9 @@ export default defineConfig({
     tsConfigPaths({
       projects: ['./tsconfig.json'],
     }),
-    tanstackStart(),
+    // Application 100 % front-end (données mockées, aucun backend) :
+    // build en mode SPA statique, déployable tel quel sur Vercel.
+    tanstackStart({ spa: { enabled: true } }),
     react(),
   ],
 })
