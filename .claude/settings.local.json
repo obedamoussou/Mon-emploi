@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)",
+      "Bash(timeout 60 npm run dev)",
+      "Read(//tmp/**)",
+      "Bash(npx tsc *)",
+      "Bash(node -e \"const p=require\\('./node_modules/@tanstack/react-start/package.json'\\); console.log\\(JSON.stringify\\({deps:p.dependencies,peer:p.peerDependencies},null,1\\)\\)\")",
+      "Bash(node -e \"const p=require\\('./node_modules/@tanstack/start-plugin-core/package.json'\\); console.log\\(Object.keys\\(p.dependencies||{}\\).filter\\(k=>k.includes\\('react'\\)||k.includes\\('vitejs'\\)\\).join\\('\\\\n'\\)\\)\")",
+      "Bash(npm run *)"
+    ]
+  }
+}
