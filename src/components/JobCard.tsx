@@ -20,7 +20,16 @@ import {
 } from '~/lib/display'
 import { cn, deadlineLabel, formatSalary, timeAgo } from '~/lib/utils'
 
-export function JobCard({ job, index = 0 }: { job: Job; index?: number }) {
+export function JobCard({
+  job,
+  index = 0,
+  minimal = false,
+}: {
+  job: Job
+  index?: number
+  /** Variante allégée (accueil) : masque lieu, nb de candidats et salaire. */
+  minimal?: boolean
+}) {
   const inst = institutionById(job.institutionId)
   const deadline = deadlineLabel(job.deadline)
 
@@ -65,15 +74,19 @@ export function JobCard({ job, index = 0 }: { job: Job; index?: number }) {
         <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-ink-500">{job.summary}</p>
 
         <div className="mt-3.5 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-ink-500 sm:mt-4 sm:gap-x-4">
-          <span className="inline-flex items-center gap-1.5">
-            <MapPin className="h-3.5 w-3.5 shrink-0 text-ink-400" />
-            <span className="truncate">{job.city}, {regionName(job.regionId)}</span>
-          </span>
+          {!minimal && (
+            <span className="inline-flex items-center gap-1.5">
+              <MapPin className="h-3.5 w-3.5 shrink-0 text-ink-400" />
+              <span className="truncate">{job.city}, {regionName(job.regionId)}</span>
+            </span>
+          )}
           <Badge variant={contractVariant[job.contractType]}>{job.contractType}</Badge>
-          <span className="inline-flex items-center gap-1.5">
-            <Users className="h-3.5 w-3.5 text-ink-400" />
-            {job.applicants} candidats
-          </span>
+          {!minimal && (
+            <span className="inline-flex items-center gap-1.5">
+              <Users className="h-3.5 w-3.5 text-ink-400" />
+              {job.applicants} candidats
+            </span>
+          )}
         </div>
 
         <div className="mt-3.5 flex items-center justify-between gap-2 border-t border-ink-100 pt-3 sm:mt-4">
@@ -93,7 +106,7 @@ export function JobCard({ job, index = 0 }: { job: Job; index?: number }) {
           </span>
         </div>
 
-        {job.salary && (
+        {!minimal && job.salary && (
           <p className="mt-3 text-sm font-semibold text-accent-700">
             {formatSalary(job.salary.min, job.salary.max, job.salary.currency, job.salary.period)}
           </p>

@@ -150,19 +150,27 @@ function StatsPanel() {
             </h3>
             <span className="text-xs text-ink-400">6 derniers mois</span>
           </div>
-          <div className="mt-6 flex h-48 items-end gap-3">
-            {applicationsTrend.map((d, i) => (
-              <div key={d.month} className="flex flex-1 flex-col items-center gap-2">
-                <motion.div
-                  initial={{ height: 0 }}
-                  animate={{ height: `${(d.value / max) * 100}%` }}
-                  transition={{ delay: i * 0.08, duration: 0.5 }}
-                  className="w-full rounded-t-lg bg-gradient-to-t from-brand-600 to-brand-400"
-                  title={`${d.value} candidatures`}
-                />
-                <span className="text-xs text-ink-400">{d.month}</span>
-              </div>
-            ))}
+          <div className="mt-6 flex h-52 flex-col">
+            <div className="flex flex-1 items-end gap-3">
+              {applicationsTrend.map((d, i) => (
+                <div key={d.month} className="flex h-full flex-1 items-end">
+                  <motion.div
+                    initial={{ height: 0 }}
+                    animate={{ height: `${(d.value / max) * 100}%` }}
+                    transition={{ delay: i * 0.08, duration: 0.5 }}
+                    className="w-full rounded-t-lg bg-gradient-to-t from-brand-600 to-brand-400"
+                    title={`${d.value} candidatures`}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="mt-2 flex gap-3">
+              {applicationsTrend.map((d) => (
+                <span key={d.month} className="flex-1 text-center text-xs text-ink-400">
+                  {d.month}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 

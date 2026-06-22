@@ -1,1 +1,0 @@
-import{e as o}from"./index-DrwC2tKm.js";const t=[["path",{d:"M7 7h10v10",key:"1tivn9"}],["path",{d:"M7 17 17 7",key:"1vkiza"}]],r=o("ArrowUpRight",t);export{r as A};

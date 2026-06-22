@@ -23,7 +23,7 @@ export function FeaturedJobs() {
         ) : (
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {data?.map((job, i) => (
-              <JobCard key={job.id} job={job} index={i} />
+              <JobCard key={job.id} job={job} index={i} minimal />
             ))}
           </div>
         )}

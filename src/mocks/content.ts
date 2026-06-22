@@ -54,60 +54,60 @@ export const faqItems: FaqItem[] = [
   {
     id: 'faq-1',
     category: 'Candidats',
-    question: 'Comment créer un compte sur la plateforme ?',
+    question: 'Comment m’inscrire en tant que candidat ?',
     answer:
-      "La création de compte est gratuite. Cliquez sur « Créer un compte », renseignez vos informations personnelles et validez votre adresse e-mail. Vous pourrez ensuite compléter votre profil et déposer votre CV.",
+      "Cliquez sur « S’inscrire comme candidat », puis renseignez vos nom, prénom, adresse e-mail, numéro de téléphone et domaine d’activité, et déposez votre CV. Aucune création de mot de passe n’est nécessaire : votre profil est aussitôt visible des organismes recruteurs.",
   },
   {
     id: 'faq-2',
     category: 'Candidats',
-    question: 'Comment postuler à une offre ?',
+    question: 'Comment consulter les offres et les concours ?',
     answer:
-      "Depuis la page de détail d'une offre, cliquez sur « Postuler ». Vous serez guidé à travers un formulaire en plusieurs étapes : informations personnelles, dépôt du CV et de la lettre de motivation, puis confirmation. Vous recevez un accusé de réception immédiat.",
+      "Rendez-vous dans la rubrique « Offres & concours ». Vous pouvez rechercher et filtrer les opportunités par ministère, institution, région, type de contrat, domaine et date de publication.",
   },
   {
     id: 'faq-3',
     category: 'Candidats',
-    question: 'Puis-je suivre l’état de mes candidatures ?',
+    question: 'Que deviennent mes informations après mon inscription ?',
     answer:
-      "Oui. Depuis votre tableau de bord candidat, l'onglet « Mes candidatures » affiche en temps réel le statut de chaque dossier : envoyée, en cours d'examen, présélectionnée, entretien, acceptée ou refusée.",
+      "Vos informations et votre CV sont transmis aux organismes recruteurs du secteur public. Ceux dont les besoins correspondent à votre profil vous contactent directement via les coordonnées que vous avez fournies.",
   },
   {
     id: 'faq-4',
-    category: 'Concours',
-    question: 'Comment fonctionnent les concours de la fonction publique ?',
+    category: 'Formations',
+    question: 'Comment accéder aux opportunités de formation ?',
     answer:
-      "Les concours sont publiés par les ministères et organismes habilités. Chaque annonce précise les conditions d'éligibilité, les épreuves, les dates et les centres d'examen. L'inscription se fait directement en ligne.",
+      "La section « Opportunités de formation » de l’accueil regroupe des formations professionnelles et certifiantes (cybersécurité, data, gestion de projet, marchés publics, langues…). Plusieurs d’entre elles sont entièrement gratuites.",
   },
   {
     id: 'faq-5',
-    category: 'Organismes',
-    question: 'Comment publier une offre en tant qu’organisme public ?',
+    category: 'Administrations',
+    question: 'Comment publier une offre en tant qu’administration ?',
     answer:
-      "Les institutions publiques, mairies, entreprises publiques, ONG et universités peuvent demander un compte organisme vérifié. Après validation, elles accèdent à un espace de gestion pour publier leurs offres et traiter les candidatures.",
+      "Cliquez sur « Connexion administration » et accédez à votre espace de gestion. Vous pouvez y publier vos offres, stages et concours, puis suivre et traiter les candidatures reçues.",
   },
   {
     id: 'faq-6',
-    category: 'Général',
-    question: 'La plateforme est-elle gratuite ?',
+    category: 'Administrations',
+    question: 'Qui peut disposer d’un espace administration ?',
     answer:
-      "Oui, la consultation des offres et la candidature sont entièrement gratuites pour les citoyens. La plateforme est un service public national au bénéfice de l'emploi.",
+      "Les ministères, mairies, entreprises publiques, ONG, universités et organismes partenaires vérifiés disposent d’un espace d’administration pour gérer leurs recrutements de bout en bout.",
   },
   {
     id: 'faq-7',
     category: 'Général',
-    question: 'Mes données personnelles sont-elles protégées ?',
+    question: 'La plateforme est-elle gratuite ?',
     answer:
-      "Absolument. La plateforme respecte la réglementation nationale sur la protection des données personnelles. Vos informations ne sont partagées qu'avec les organismes auprès desquels vous postulez.",
+      "Oui. L’inscription, la consultation des offres et l’accès aux opportunités sont entièrement gratuits pour les citoyens. La plateforme est un service public national au bénéfice de l’emploi.",
   },
   {
     id: 'faq-8',
-    category: 'Candidats',
-    question: 'Puis-je postuler depuis mon téléphone ?',
+    category: 'Général',
+    question: 'Puis-je utiliser la plateforme depuis mon téléphone ?',
     answer:
-      "Oui, la plateforme est entièrement responsive et optimisée pour mobile, tablette et ordinateur. Vous pouvez consulter les offres et postuler depuis n'importe quel appareil.",
+      "Oui, la plateforme est entièrement responsive et optimisée pour mobile, tablette et ordinateur. Vous pouvez vous inscrire et consulter les opportunités depuis n’importe quel appareil.",
   },
 ]
 
 // Catégories de FAQ pour le filtre de la page d'accueil.
-export const faqCategories = ['Tous', 'Candidats', 'Concours', 'Organismes', 'Général'] as const
+export const faqCategories = ['Tous', 'Candidats', 'Formations', 'Administrations', 'Général'] as const

@@ -8,15 +8,15 @@ const columns = [
     links: [
       { label: 'Rechercher une offre', to: '/offres' },
       { label: 'Concours publics', to: '/offres' },
-      { label: 'Mon tableau de bord', to: '/tableau-de-bord' },
-      { label: 'Mes candidatures', to: '/tableau-de-bord' },
+      { label: 'Opportunités de formation', to: '/' },
+      { label: 'Annuaire des organismes', to: '/organismes' },
     ],
   },
   {
-    title: 'Organismes',
+    title: 'Administrations',
     links: [
+      { label: 'Espace administration', to: '/espace-organisme' },
       { label: 'Publier une offre', to: '/espace-organisme' },
-      { label: 'Espace organisme', to: '/espace-organisme' },
       { label: 'Annuaire des organismes', to: '/organismes' },
       { label: 'Devenir partenaire', to: '/organismes' },
     ],

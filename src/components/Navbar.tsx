@@ -1,23 +1,20 @@
 import { Link } from '@tanstack/react-router'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Bell, Briefcase, Building2, LayoutDashboard, Menu, Search, UserPlus, X } from 'lucide-react'
+import { Briefcase, Building2, Menu, ShieldCheck, UserPlus, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Logo } from '~/components/Logo'
-import { Avatar } from '~/components/Avatar'
-import { SignupModal } from '~/components/SignupModal'
-import { currentUser } from '~/mocks/users'
+import { CandidateRegisterModal } from '~/components/CandidateRegisterModal'
 import { cn } from '~/lib/utils'
 
 const navLinks = [
   { to: '/offres', label: 'Offres & concours', icon: Briefcase },
   { to: '/organismes', label: 'Organismes', icon: Building2 },
-  { to: '/tableau-de-bord', label: 'Espace candidat', icon: LayoutDashboard },
 ] as const
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [signupOpen, setSignupOpen] = useState(false)
+  const [registerOpen, setRegisterOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -52,42 +49,17 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center gap-2">
-            {/* <Link
-              to="/offres"
-              className="hidden h-10 w-10 items-center justify-center rounded-xl text-ink-500 transition hover:bg-ink-100 hover:text-ink-800 sm:flex"
-              aria-label="Rechercher"
-            >
-              <Search className="h-5 w-5" />
-            </Link> */}
-            <Link
-              to="/tableau-de-bord"
-              search={{ section: 'notifications' }}
-              className="relative hidden h-10 w-10 items-center justify-center rounded-xl text-ink-500 transition hover:bg-ink-100 hover:text-ink-800 sm:flex"
-              aria-label="Notifications"
-            >
-              <Bell className="h-5 w-5" />
-              <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white" />
-            </Link>
-            {/* <Link
-              to="/tableau-de-bord"
-              className="flex items-center gap-2 rounded-xl py-1 pl-1 pr-1 transition hover:bg-ink-50 sm:pr-3"
-              aria-label="Espace candidat"
-            >
-              <Avatar initials="AD" color={currentUser.avatarColor} size="sm" />
-              <span className="hidden text-sm font-semibold text-ink-800 sm:inline">
-                {currentUser.firstName}
-              </span>
-            </Link> */}
             <button
-              onClick={() => setSignupOpen(true)}
-              className="btn-secondary hidden lg:inline-flex"
+              onClick={() => setRegisterOpen(true)}
+              className="btn-primary hidden lg:inline-flex"
             >
               <UserPlus className="h-4 w-4" />
               S’inscrire
             </button>
-            {/* <Link to="/espace-organisme" className="btn-primary hidden lg:inline-flex">
-              Espace organisme
-            </Link> */}
+            <Link to="/admin" className="btn-secondary hidden lg:inline-flex">
+              <ShieldCheck className="h-4 w-4" />
+              Espace admin
+            </Link>
 
             <button
               className="flex h-10 w-10 items-center justify-center rounded-xl text-ink-700 transition hover:bg-ink-100 lg:hidden"
@@ -109,22 +81,6 @@ export function Navbar() {
               transition={{ duration: 0.22 }}
             >
               <div className="container-page space-y-1 py-4">
-                {/* Accès rapide espace candidat */}
-                {/* <Link
-                  to="/tableau-de-bord"
-                  onClick={() => setMobileOpen(false)}
-                  className="mb-2 flex items-center gap-3 rounded-2xl border border-ink-100 bg-ink-50/60 p-3 transition hover:border-brand-200"
-                >
-                  <Avatar initials="AD" color={currentUser.avatarColor} size="md" />
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-bold text-ink-900">
-                      {currentUser.firstName} {currentUser.lastName}
-                    </p>
-                    <p className="text-xs text-ink-500">Accéder à mon espace candidat</p>
-                  </div>
-                  <LayoutDashboard className="h-5 w-5 text-brand-500" />
-                </Link> */}
-
                 {navLinks.map((l) => (
                   <Link
                     key={l.to}
@@ -136,25 +92,25 @@ export function Navbar() {
                     {l.label}
                   </Link>
                 ))}
-
                 <div className="grid grid-cols-1 gap-2 pt-2">
                   <button
                     onClick={() => {
                       setMobileOpen(false)
-                      setSignupOpen(true)
+                      setRegisterOpen(true)
                     }}
-                    className="btn-secondary w-full"
+                    className="btn-primary w-full"
                   >
                     <UserPlus className="h-4 w-4" />
                     S’inscrire
                   </button>
-                  {/* <Link
-                    to="/espace-organisme"
+                  <Link
+                    to="/admin"
                     onClick={() => setMobileOpen(false)}
-                    className="btn-primary w-full"
+                    className="btn-secondary w-full"
                   >
-                    Organisme
-                  </Link> */}
+                    <ShieldCheck className="h-4 w-4" />
+                    Espace admin
+                  </Link>
                 </div>
               </div>
             </motion.div>
@@ -162,7 +118,7 @@ export function Navbar() {
         </AnimatePresence>
       </header>
 
-      <SignupModal open={signupOpen} onClose={() => setSignupOpen(false)} />
+      <CandidateRegisterModal open={registerOpen} onClose={() => setRegisterOpen(false)} />
     </>
   )
 }

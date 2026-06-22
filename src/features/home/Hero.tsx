@@ -1,20 +1,13 @@
-import { Link } from '@tanstack/react-router'
 import { motion } from 'framer-motion'
-import { BadgeCheck, Building2, Sparkles, TrendingUp } from 'lucide-react'
-import { SearchBar } from '~/components/SearchBar'
-import { compactNumber } from '~/lib/utils'
-import { platformStats } from '~/mocks/content'
-
-const popularSearches = [
-  'Enseignant',
-  'Médecin',
-  'Concours fonction publique',
-  'Ingénieur',
-  'Stage',
-  'Administration',
-]
+import { ArrowRight, LogIn, UserPlus } from 'lucide-react'
+import { useState } from 'react'
+import { CandidateRegisterModal } from '~/components/CandidateRegisterModal'
+import { AdminLoginModal } from '~/components/AdminLoginModal'
 
 export function Hero() {
+  const [registerOpen, setRegisterOpen] = useState(false)
+  const [loginOpen, setLoginOpen] = useState(false)
+
   return (
     <section className="relative overflow-hidden bg-ink-950">
       {/* Décor */}
@@ -30,11 +23,6 @@ export function Hero() {
           transition={{ duration: 0.5 }}
           className="mx-auto max-w-3xl text-center"
         >
-          {/* <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white backdrop-blur">
-            <Sparkles className="h-3.5 w-3.5 text-gold-400" />
-            Portail national officiel de l’emploi public
-          </span> */}
-
           <h1 className="mt-6 text-balance font-display text-5xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-7xl">
             Servez votre pays.
             <br />
@@ -49,49 +37,34 @@ export function Hero() {
           </p>
         </motion.div>
 
+        {/* Boutons d'action */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.12 }}
-          className="mx-auto mt-9 max-w-4xl"
+          className="mx-auto mt-10 flex max-w-md flex-col items-center gap-3"
         >
-          <SearchBar variant="hero" />
+          <button
+            onClick={() => setRegisterOpen(true)}
+            className="btn-primary h-14 w-full text-base"
+          >
+            <UserPlus className="h-5 w-5" />
+            Uploader mon CV
+            <ArrowRight className="h-4 w-4" />
+          </button>
 
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-sm text-white/60">
-            <span className="font-medium text-white/80">Recherches fréquentes :</span>
-            {popularSearches.map((s) => (
-              <Link
-                key={s}
-                to="/offres"
-                search={{ q: s }}
-                className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-white/80 transition hover:border-white/30 hover:bg-white/10 hover:text-white"
-              >
-                {s}
-              </Link>
-            ))}
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mx-auto mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-white/70"
-        >
-          <span className="inline-flex items-center gap-2">
-            <BadgeCheck className="h-4 w-4 text-accent-400" />
-            {compactNumber(platformStats[2]?.value ?? 0)} candidats inscrits
-          </span>
-          <span className="inline-flex items-center gap-2">
-            <Building2 className="h-4 w-4 text-brand-300" />
-            {platformStats[1]?.value}+ organismes vérifiés
-          </span>
-          <span className="inline-flex items-center gap-2">
-            <TrendingUp className="h-4 w-4 text-gold-400" />
-            {compactNumber(platformStats[0]?.value ?? 0)} offres actives
-          </span>
+          <button
+            onClick={() => setLoginOpen(true)}
+            className="btn h-12 w-full border border-white/20 bg-white/5 text-[15px] text-white backdrop-blur transition hover:bg-white/10"
+          >
+            <LogIn className="h-5 w-5" />
+            Connexion administration
+          </button>
         </motion.div>
       </div>
+
+      <CandidateRegisterModal open={registerOpen} onClose={() => setRegisterOpen(false)} />
+      <AdminLoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
     </section>
   )
 }
