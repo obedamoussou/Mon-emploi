@@ -17,6 +17,7 @@ import {
   Plus,
   Search,
   Settings,
+  Target,
   Trash2,
   TrendingUp,
   UserCheck,
@@ -33,21 +34,23 @@ import {
   type AdminAccountStatus,
   type AdminCandidate,
 } from '~/mocks/admin'
-import { institutions } from '~/mocks/institutions'
+import { institutions, institutionById } from '~/mocks/institutions'
 import { jobs, jobById } from '~/mocks/jobs'
 import { applications } from '~/mocks/applications'
 import { trainings as allTrainings } from '~/mocks/trainings'
 import { userById } from '~/mocks/users'
 import { regionName } from '~/mocks/regions'
+import { categoryName } from '~/mocks/categories'
 import { kindLabels, statusVariant } from '~/lib/display'
 import { cn, formatNumber, initials, timeAgo } from '~/lib/utils'
-import type { Institution } from '~/types'
+import type { Institution, Job } from '~/types'
 
 type Section =
   | 'overview'
   | 'candidats'
   | 'administrations'
   | 'offres'
+  | 'matching'
   | 'formations'
   | 'candidatures'
   | 'parametres'
@@ -77,6 +80,7 @@ function AdminDashboard() {
 
   const items: DashboardNavItem[] = [
     { key: 'overview', label: 'Vue d’ensemble', icon: LayoutDashboard },
+    { key: 'matching', label: 'Profils par offre', icon: Target },
     { key: 'candidats', label: 'Candidats', icon: Users, badge: adminCandidates.length },
     { key: 'administrations', label: 'Administrations', icon: Building2, badge: institutions.length },
     { key: 'offres', label: 'Offres & concours', icon: Briefcase, badge: jobs.length },
@@ -102,6 +106,7 @@ function AdminDashboard() {
       {section === 'candidats' && <CandidatesPanel />}
       {section === 'administrations' && <AdministrationsPanel />}
       {section === 'offres' && <OffresPanel />}
+      {section === 'matching' && <MatchingPanel />}
       {section === 'formations' && <FormationsPanel />}
       {section === 'candidatures' && <CandidaturesPanel />}
       {section === 'parametres' && <SettingsPanel />}
@@ -552,6 +557,150 @@ function OffresPanel() {
             </div>
           </div>
         ))}
+      </div>
+    </div>
+  )
+}
+
+/* --------------------------- Profils par offre --------------------------- */
+
+const TOKEN_STOP = new Set(['fonction', 'publique', 'action', 'sociale'])
+
+function tokenize(s: string): string[] {
+  return s
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .split(/[^a-z]+/)
+    .filter((w) => w.length > 3 && !TOKEN_STOP.has(w))
+}
+
+/** Score de correspondance (mock, déterministe) entre un candidat et une offre. */
+function matchScore(candidate: AdminCandidate, job: Job): number {
+  const jobTokens = new Set(tokenize(categoryName(job.categoryId)))
+  const overlap = tokenize(candidate.domain).filter((t) => jobTokens.has(t)).length
+  let score = 52 + overlap * 23
+  if (candidate.regionId === job.regionId) score += 11
+  const h = [...candidate.id].reduce((a, ch) => a + ch.charCodeAt(0), 0)
+  score += (h % 9) - 4
+  return Math.max(44, Math.min(99, score))
+}
+
+function matchTier(score: number): { label: string; variant: 'accent' | 'brand' | 'neutral' } {
+  if (score >= 85) return { label: 'Excellent', variant: 'accent' }
+  if (score >= 70) return { label: 'Bon profil', variant: 'brand' }
+  return { label: 'Moyen', variant: 'neutral' }
+}
+
+function MatchingPanel() {
+  const [jobId, setJobId] = useState(jobs[0]?.id ?? '')
+  const [onlyStrong, setOnlyStrong] = useState(false)
+  const job = jobById(jobId)
+
+  const ranked = job
+    ? adminCandidates
+        .map((c) => ({ candidate: c, score: matchScore(c, job) }))
+        .filter((r) => (onlyStrong ? r.score >= 70 : true))
+        .sort((a, b) => b.score - a.score)
+    : []
+
+  const inst = job ? institutionById(job.institutionId) : undefined
+
+  return (
+    <div>
+      <PanelHeader
+        title="Profils par offre"
+        subtitle="Sélectionnez une offre pour découvrir les candidats qui y correspondent le mieux."
+      />
+
+      {/* Sélecteur d'offre */}
+      <div className="card p-4 sm:p-5">
+        <label className="label">Offre ciblée</label>
+        <select value={jobId} onChange={(e) => setJobId(e.target.value)} className="input cursor-pointer">
+          {jobs.map((j) => {
+            const o = institutionById(j.institutionId)
+            return (
+              <option key={j.id} value={j.id}>
+                {j.title} — {o?.shortName ?? ''}
+              </option>
+            )
+          })}
+        </select>
+
+        {job && (
+          <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-ink-100 pt-4 text-sm text-ink-600">
+            <span className="inline-flex items-center gap-2">
+              <Avatar initials={inst?.logoInitials ?? 'TL'} color={inst?.logoColor} className="!h-8 !w-8 !rounded-lg !text-xs" />
+              <span className="font-semibold text-ink-900">{inst?.shortName}</span>
+            </span>
+            <Badge variant="brand">{kindLabels[job.kind]}</Badge>
+            <Badge variant="neutral">{job.contractType}</Badge>
+            <span className="text-ink-500">{categoryName(job.categoryId)}</span>
+            <span className="text-ink-500">· {regionName(job.regionId)}</span>
+          </div>
+        )}
+      </div>
+
+      <div className="mb-4 mt-5 flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm text-ink-600">
+          <span className="font-bold text-ink-900">{ranked.length}</span> profil(s) correspondant(s)
+        </p>
+        <label className="flex cursor-pointer items-center gap-2 text-sm text-ink-600">
+          <input
+            type="checkbox"
+            checked={onlyStrong}
+            onChange={(e) => setOnlyStrong(e.target.checked)}
+            className="h-4 w-4 accent-brand-600"
+          />
+          Correspondance ≥ 70 %
+        </label>
+      </div>
+
+      <div className="space-y-3">
+        {ranked.map(({ candidate: c, score }, i) => {
+          const tier = matchTier(score)
+          return (
+            <motion.div
+              key={c.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: Math.min(i * 0.04, 0.25) }}
+              className="card flex flex-wrap items-center gap-4 p-4"
+            >
+              <Avatar initials={initials(c.name)} color={c.avatarColor} size="lg" className="!h-12 !w-12" />
+
+              <div className="min-w-0 flex-1">
+                <p className="truncate font-semibold text-ink-900">{c.name}</p>
+                <p className="truncate text-sm text-ink-500">{c.title}</p>
+                <p className="mt-0.5 truncate text-xs text-ink-400">
+                  {c.domain} · {regionName(c.regionId)}
+                </p>
+              </div>
+
+              {/* Score */}
+              <div className="flex w-28 shrink-0 flex-col items-end gap-1">
+                <span className="font-display text-lg font-extrabold text-brand-700">{score}%</span>
+                <div className="h-1.5 w-full overflow-hidden rounded-full bg-ink-100">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-brand-500 to-accent-500"
+                    style={{ width: `${score}%` }}
+                  />
+                </div>
+                <Badge variant={tier.variant}>{tier.label}</Badge>
+              </div>
+
+              <button className="btn-secondary w-full sm:w-auto">
+                <Eye className="h-4 w-4" /> Voir le profil
+              </button>
+            </motion.div>
+          )
+        })}
+
+        {ranked.length === 0 && (
+          <div className="card p-10 text-center text-sm text-ink-500">
+            Aucun profil ne correspond aux critères pour cette offre.
+          </div>
+        )}
       </div>
     </div>
   )
