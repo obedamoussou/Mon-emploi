@@ -1,5 +1,5 @@
 // =====================================================================
-//  Types du domaine — Plateforme Nationale de Recrutement
+//  Types du domaine — Talent-Bénin
 // =====================================================================
 
 export type ContractType =

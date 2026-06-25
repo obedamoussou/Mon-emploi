@@ -1,7 +1,7 @@
 import type { Region } from '~/types'
 
 // Régions inspirées d'un grand pays d'Afrique de l'Ouest (noms réalistes,
-// fictifs pour la plateforme nationale Mon Emploi).
+// fictifs pour la plateforme nationale Talent-Bénin).
 export const regions: Region[] = [
   { id: 'reg-cap', name: 'District de la Capitale', chefLieu: 'Nseba', population: 2480000 },
   { id: 'reg-littoral', name: 'Littoral', chefLieu: 'Port-Akwa', population: 1920000 },
