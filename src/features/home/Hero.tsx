@@ -49,7 +49,7 @@ export function Hero() {
             className="btn-primary h-14 w-full text-base"
           >
             <UserPlus className="h-5 w-5" />
-            Talent - J'enregitre mon profil
+            Talent - J'enregistre mon profil
             <ArrowRight className="h-4 w-4" />
           </button>
 
