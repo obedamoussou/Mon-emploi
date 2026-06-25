@@ -49,7 +49,7 @@ export function Hero() {
             className="btn-primary h-14 w-full text-base"
           >
             <UserPlus className="h-5 w-5" />
-            J'enregitrer mon profil
+            Talent - J'enregitrer mon profil
             <ArrowRight className="h-4 w-4" />
           </button>
 
@@ -58,7 +58,7 @@ export function Hero() {
             className="btn h-12 w-full border border-white/20 bg-white/5 text-[15px] text-white backdrop-blur transition hover:bg-white/10"
           >
             <LogIn className="h-5 w-5" />
-            Je formule un besoin
+            Entité publique - Je formule un besoin
           </button>
         </motion.div>
       </div>

@@ -168,7 +168,7 @@ const seeds: Seed[] = [
     regionId: 'reg-maritime',
     city: 'Sèmè-Podji',
     summary:
-      "Rejoignez l'équipe qui construit l'infrastructure numérique de l'État. Nous recherchons un ingénieur DevOps pour fiabiliser la plateforme e-Gouvernement.",
+      "Rejoignez une équipe de passionné pour concevoir, programmer et déployer des systèmes automatisés et des machines intelligentes.",
     missions: [
       'Concevoir et maintenir les pipelines CI/CD',
       'Automatiser le déploiement des services publics numériques',
@@ -619,7 +619,7 @@ const seeds: Seed[] = [
     regionId: 'reg-cap',
     city: 'Nseba',
     summary:
-      "Le Ministère de l’Économie et des Finances propose un stage de fin d'études pour participer au développement des interfaces des services publics en ligne.",
+      "Le Ministère de l’Économie et des Finances recherche un expert en financement durable.",
     missions: [
       'Développer des interfaces React/TypeScript accessibles',
       'Intégrer les maquettes du design system de l’État',

@@ -39,10 +39,10 @@ export function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div>
             <Logo />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-500">
+            {/* <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-500">
               Le portail national officiel de l’emploi public. Toutes les offres, formations
               et appels à candidatures des institutions de la République, au même endroit.
-            </p>
+            </p> */}
             <div className="mt-5 space-y-2 text-sm text-ink-500">
               <p className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-brand-500" /> Cité Administrative, Cotonou
@@ -77,7 +77,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-ink-100 pt-6 sm:flex-row">
           <p className="text-xs text-ink-400">
-            © {new Date().getFullYear()} Mon Emploi — République du Bénin. Tous droits réservés.
+            © {new Date().getFullYear()} — République du Bénin. Tous droits réservés.
           </p>
           <div className="flex items-center gap-2">
             {[Twitter, Linkedin, Facebook].map((I, i) => (
