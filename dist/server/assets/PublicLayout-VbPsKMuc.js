@@ -308,7 +308,7 @@ function Footer() {
       /* @__PURE__ */ jsxs("p", { className: "text-xs text-ink-400", children: [
         "© ",
         (/* @__PURE__ */ new Date()).getFullYear(),
-        " Mon Emploi — République du Bénin. Tous droits réservés."
+        " Talent-Bénin — République du Bénin. Tous droits réservés."
       ] }),
       /* @__PURE__ */ jsx("div", { className: "flex items-center gap-2", children: [Twitter, Linkedin, Facebook].map((I, i) => /* @__PURE__ */ jsx(
         "a",

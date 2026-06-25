@@ -39,12 +39,12 @@ const Route$b = createRootRouteWithContext()({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       {
-        title: "Mon Emploi — Plateforme Nationale de Recrutement Public"
+        title: "Talent-Bénin — Plateforme Nationale de Recrutement Public"
       },
-      {
-        name: "description",
-        content: "Mon Emploi, le portail national de l’emploi public au Bénin : offres, stages, concours et appels à candidatures des ministères, mairies, entreprises publiques, ONG et universités."
-      },
+      // {
+      //   name: "description",
+      //   content: "Mon Emploi, le portail national de l’emploi public au Bénin : offres, stages, concours et appels à candidatures des ministères, mairies, entreprises publiques, ONG et universités."
+      // },
       { name: "theme-color", content: "#1f47e6" }
     ],
     links: [{ rel: "stylesheet", href: appCss }]
