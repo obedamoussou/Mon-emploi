@@ -15,7 +15,7 @@ function HomePage() {
       <Hero />
       <FeaturedJobs />
       <TrainingOpportunities />
-      <FaqSection />
+      {/* <FaqSection /> */}
     </PublicLayout>
   )
 }

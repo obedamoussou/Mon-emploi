@@ -40,7 +40,7 @@ export function Footer() {
           <div>
             <Logo />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-500">
-              Le portail national officiel de l’emploi public. Toutes les offres, stages, concours
+              Le portail national officiel de l’emploi public. Toutes les offres, formations
               et appels à candidatures des institutions de la République, au même endroit.
             </p>
             <div className="mt-5 space-y-2 text-sm text-ink-500">
@@ -56,7 +56,7 @@ export function Footer() {
             </div>
           </div>
 
-          {columns.map((col) => (
+          {/* {columns.map((col) => (
             <div key={col.title}>
               <h4 className="text-sm font-bold text-ink-900">{col.title}</h4>
               <ul className="mt-4 space-y-2.5">
@@ -72,7 +72,7 @@ export function Footer() {
                 ))}
               </ul>
             </div>
-          ))}
+          ))} */}
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-ink-100 pt-6 sm:flex-row">

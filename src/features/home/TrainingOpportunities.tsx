@@ -10,7 +10,7 @@ export function TrainingOpportunities() {
     <section className="border-t border-ink-100 bg-white py-16 sm:py-20">
       <div className="container-page">
         <SectionHeading
-          eyebrow="Montée en compétences"
+          // eyebrow="Montée en compétences"
           title="Opportunités de formation"
           description="Certifications et formations professionnelles pour booster votre profil : cybersécurité, data, gestion de projet et bien plus."
         />

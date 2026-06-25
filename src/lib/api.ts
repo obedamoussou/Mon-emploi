@@ -82,12 +82,10 @@ export async function fetchJobs(filters: JobFilters): Promise<Paginated<Job>> {
   return { items, total, page, pageSize: PAGE_SIZE, totalPages }
 }
 
-export async function fetchFeaturedJobs(limit = 6): Promise<Job[]> {
+export async function fetchFeaturedJobs(limit = 4): Promise<Job[]> {
   await delay(200)
-  return jobs
-    .filter((j) => j.featured)
-    .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt))
-    .slice(0, limit)
+  // Conserve l'ordre de déclaration (seeds) pour la sélection « à la une ».
+  return jobs.filter((j) => j.featured).slice(0, limit)
 }
 
 export async function fetchLatestJobs(limit = 6): Promise<Job[]> {
